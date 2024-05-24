@@ -1,0 +1,53 @@
+package rules.skinCondition;
+import com.ftn.sbnz.model.models.Person;
+import com.ftn.sbnz.model.models.SkinCondition;
+import com.ftn.sbnz.model.models.SkinConditionEnum;
+
+rule "Skin condition acne"
+    when
+        $person: Person($username: username)
+        $skinCondition: SkinCondition(
+            wrinkles = false
+            dryness = false
+            reactive = false
+            problematic = false)
+    then
+        modify($person){setSkinCondition(SkinConditionEnum.ACNE)}
+end
+
+rule "Skin condition dehydration"
+    when
+        $person: Person($username: username)
+        $skinCondition: SkinCondition(
+            wrinkles = false
+            dryness = true
+            reactive = false
+            problematic = false)
+    then
+        modify($person){setSkinCondition(SkinConditionEnum.DEHYDRATION)}
+end
+
+rule "Skin condition mature"
+    when
+        $person: Person($username: username)
+        $skinCondition: SkinCondition(
+                wrinkles = true,
+                dryness = false,
+                reactive = false
+                problematic = false)
+    then
+        modify($person){setSkinCondition(SkinConditionEnum.MATURE)}
+end
+
+rule "Skin condition reactive"
+    when
+        $person: Person($username: username)
+        $skinCondition: SkinCondition(
+                wrinkles = false,
+                dryness = false,
+                reactive = true
+                problematic = false)
+    then
+        modify($person){setSkinCondition(SkinConditionEnum.REACTIVE)}
+end
+

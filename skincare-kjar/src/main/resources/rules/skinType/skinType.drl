@@ -1,0 +1,48 @@
+package rules.skinType;
+import com.ftn.sbnz.model.models.Person;
+import com.ftn.sbnz.model.models.SkinType;
+import com.ftn.sbnz.model.models.SkinTypeEnum;
+
+rule "Skin type normal"
+    when
+        $person: Person($username: username)
+        $skinType: SkinType(
+            sebum = false
+            largePores = false
+            flaky = false)
+    then
+        modify($person){setSkinType(SkinTypeEnum.NORMAL)}
+end
+
+rule "Skin type dry"
+    when
+        $person: Person($username: username)
+        $skinType: SkinType(
+            sebum = false
+            largePores = false
+            flaky = true)
+    then
+        modify($person){setSkinType(SkinTypeEnum.DRY)}
+end
+
+rule "Skin type oily"
+    when
+        $person: Person($username: username)
+        $skinType: SkinType(
+            sebum = false
+            largePores = false
+            flaky = false)
+    then
+        modify($person){setSkinType(SkinTypeEnum.OILY)}
+end
+
+rule "Skin type dry"
+    when
+        $person: Person($username: username)
+        $skinType: SkinType(
+            sebum = false
+            largePores = false
+            flaky = true)
+    then
+        modify($person){setSkinType(SkinTypeEnum.DRY)}
+end

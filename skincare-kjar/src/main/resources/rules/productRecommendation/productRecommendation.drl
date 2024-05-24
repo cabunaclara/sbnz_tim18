@@ -1,0 +1,21 @@
+package rules.productRecommendation;
+
+import com.ftn.sbnz.model.models.Person;
+import com.ftn.sbnz.model.models.SkinConditionEnum;
+import com.ftn.sbnz.model.models.Product;
+import com.ftn.sbnz.model.models.ProductType;
+import com.ftn.sbnz.model.models.Ingredient;
+import java.util.List;
+
+rule "Product recommendation for dehydrated skin"
+    when
+        $person: Person($username: username,
+                        skinCondition = SkinConditionEnum.DEHYDRATION)
+        $list: List()  from collect (Product(productType = ProductType.CREAM))
+    then
+        System.out.println("Number of found creams for dehydrated skin "+ $list.size());
+        for(Object o: $list){
+          System.out.println(o.toString());
+        }
+end
+
